@@ -1,0 +1,9 @@
+services:
+  openapi-generator-cli:
+    image: openapitools/openapi-generator-cli
+    network_mode: "host"
+    user: "${LOCAL_UID}:${LOCAL_GID}"
+    volumes:
+      - ../openapi-generator-cli/config.yml:/config.yml
+      - ../openapi-generator-cli/local:/local
+    command: generate -c config.yml

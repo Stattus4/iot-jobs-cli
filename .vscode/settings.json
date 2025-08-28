@@ -1,0 +1,18 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.fixAll.pylint": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "files.exclude": {
+        "**/__pycache__": true
+    },
+    "makefile.configureOnOpen": false,
+    "python.analysis.extraPaths": [
+        "./openapi-generator-cli/local"
+    ],
+    "python.formatting.provider": "autopep8",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.mypyEnabled": true
+}

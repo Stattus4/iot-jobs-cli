@@ -3,3 +3,5 @@ __pycache__
 .git/
 .mypy_cache/
 .venv/
+openapi-generator-cli/local/
+!openapi-generator-cli/local/.gitkeep
