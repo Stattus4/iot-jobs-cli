@@ -1,5 +1,6 @@
 PROJECT_DIR := $(shell pwd)
 DOCKER_COMPOSE := docker/docker-compose.yml
+DOT_ENV := .env
 LOCAL_DIR := $(PROJECT_DIR)/openapi-generator-cli/local
 REQUIREMENTS := $(PROJECT_DIR)/requirements.txt 
 VENV_DIR := $(PROJECT_DIR)/.venv
@@ -22,6 +23,7 @@ check-local-dir:
 	@if [ ! -d "$(LOCAL_DIR)" ]; then \
 		echo ">>> Creating $(LOCAL_DIR) directory..."; \
 		mkdir -p $(LOCAL_DIR); \
+		touch $(LOCAL_DIR)\.gitkeep; \
 	fi
 	@if [ "$$(stat -c '%u:%g' $(LOCAL_DIR))" != "$(UID):$(GID)" ]; then \
 		echo ">>> Fixing $(LOCAL_DIR) directory ownership..."; \
@@ -31,7 +33,7 @@ check-local-dir:
 .PHONY: run-openapi-generator-cli
 run-openapi-generator-cli: check-local-dir
 	@echo ">>> Running OpenAPI Generator CLI..."
-	LOCAL_UID=$(UID) LOCAL_GID=$(GID) docker compose -f $(DOCKER_COMPOSE) run --rm openapi-generator-cli
+	LOCAL_UID=$(UID) LOCAL_GID=$(GID) docker compose --env-file $(DOT_ENV) -f $(DOCKER_COMPOSE) run --rm openapi-generator-cli
 
 .PHONY: install-openapi-generator-cli
 install-openapi-generator-cli: venv

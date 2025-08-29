@@ -4,6 +4,10 @@ services:
     network_mode: "host"
     user: "${LOCAL_UID}:${LOCAL_GID}"
     volumes:
-      - ../openapi-generator-cli/config.yml:/config.yml
       - ../openapi-generator-cli/local:/local
-    command: generate -c config.yml
+    command: [
+      "generate",
+      "-i", "${OPENAPI_GENERATOR_CLI_INPUT_SPEC}",
+      "-g", "python",
+      "-o", "/local"
+    ]
